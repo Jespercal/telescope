@@ -62,6 +62,9 @@ return [
             'connection' => env('DB_CONNECTION', 'mysql'),
             'chunk' => 1000,
         ],
+        'remote' => [
+            'url' => env("TELESCOPE_REMOTE_URL", ''),
+        ]
     ],
 
     /*
