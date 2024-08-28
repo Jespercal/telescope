@@ -128,7 +128,7 @@ class EntryModel extends Model
         {
             $tags = $the_tag->explode('|')->trim()->filter()->values();
 
-            $this->where(function($subquery) use ($tags)
+            $query->where(function($subquery) use ($tags)
             {
                 foreach ($tags as $tag)
                 {
@@ -149,7 +149,7 @@ class EntryModel extends Model
 
             foreach ($tags as $tag)
             {
-                $this->whereIn('uuid', function($query) use ($tag)
+                $query->whereIn('uuid', function($query) use ($tag)
                 {
                     $query->whereTelescope($tag, true);
                 });
@@ -158,7 +158,7 @@ class EntryModel extends Model
             return $this;
         }
 
-        $this->when($tag, function($query, $tag)
+        $query->when($tag, function($query, $tag)
         {
             $tags = Str::of($tag ?? '')->explode(',')->trim()->filter();
 
